@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.wigocreative.multas.app" version="1.0.0">
+  <name>MultasApp</name>
+  <description>
+   Verifica tus multas en Brasil
+  </description>
+  <author email="wigo@wigolabs.com" href="https://wigolabs.com">
+   Wigo Creative
+  </author>
+</widget>
