@@ -1,0 +1,30 @@
+{
+	"tabris" : {
+		"main" : {
+			"#main" : {
+				"title" : "Consulta Multas CELEPAR"
+			},
+			"#refreshBtn" : {
+				"text" : "Recargar"
+			}
+		},
+		"settingsPage" : {
+			"#settingsPage" : {
+				"title" : "Registro de Chapas"
+			},
+			"#inputPlacas" : {
+				"message" : "Inserte su chapa"
+			},
+			"#addPlacaBtn" : {
+				"text" : "Agregar Chapa"
+			},
+			".removeItemBtn" : {
+				"text" : "Eliminar"
+			}
+		}
+	},
+	"web" : {
+		"addLabel" : "Agregue chapas desde el menú lateral",
+		"submitBtn" : "Consultar"
+	}
+}
