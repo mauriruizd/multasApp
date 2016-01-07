@@ -6,20 +6,36 @@
 			},
 			"#refreshBtn" : {
 				"text" : "Recargar"
-			}
-		},
-		"settingsPage" : {
+			},
 			"#settingsPage" : {
 				"title" : "Registro de Chapas"
 			},
-			"#inputPlacas" : {
+			"#inputplaca" : {
 				"message" : "Inserte su chapa"
 			},
-			"#addPlacaBtn" : {
+			"#addplaca" : {
 				"text" : "Agregar Chapa"
 			},
+			"#inputrenavam" : {
+				"message" : "Inserte su Renavam"
+			},
+			"#addrenavam" : {
+				"text" : "Agregar Renavam"
+			},
 			".removeItemBtn" : {
-				"text" : "Eliminar"
+				"text" : "Eliminar",
+				"background" : "#CC3333",
+				"textColor" : "#FFF"
+			},
+			".actionBtn" : {
+				"textColor" : "#FFF",
+				"background" : "#29323D"
+			},
+			"#placaTab" : {
+				"title" : "Consulta por Chapa"
+			},
+			"#renavamTab" : {
+				"title" : "Consulta por Renavam"
 			}
 		}
 	},
