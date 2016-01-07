@@ -1,3 +1,5 @@
+Promise = require('promise');
+require('whatwg-fetch');
 var placas = null;
 var renavams = null;
 loadItems();
@@ -24,13 +26,6 @@ var tabs = tabris.create("TabFolder", {
 	paging : true
 }).appendTo(page);
 
-var placaTab = null;
-
-/*var renavamTab = tabris.create("Tab", {
-	id : 'renavamTab'
-}).appendTo(tabs);
-require('./renavamTab').appendTo(placaTab);*/
-
 page.open();
 onLoaded();
 
@@ -40,7 +35,7 @@ function createWebView(item, type) {
 	var page = tabris.create("Page", {
 		topLevel : false
 	});
-
+/*
 	var webView = tabris.create("WebView", {
 		layoutData : {
 			top : 0,
@@ -52,7 +47,59 @@ function createWebView(item, type) {
 	}).on("load", function() {
 		page.set("title", type.toUpperCase() + ' ' + item);
 	}).appendTo(page);
+*/
+	var txt = tabris.create("TextInput", {
+		layoutData : {
+			top : 10,
+			left : 20,
+			right : 20
+		},
+		message : type
+	}).appendTo(page);
 
+	var img = tabris.create("ImageView", {
+		layoutData : {
+			top : "prev() 10",
+			left : 40,
+			right : 40
+		}
+	}).appendTo(page);
+
+	fetch("http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp")
+	.then(function(r) {
+		console.log(r);
+	});
+
+	var captcha = tabris.create("TextInput", {
+		layoutData : {
+			top : "prev() 10",
+			left : 20,
+			right : 20
+		},
+		message : "Captcha"
+	}).appendTo(page);
+
+	var btn = tabris.create("Button", {
+		layoutData : {
+			top : "prev() 10",
+			left : 20,
+			right : 20
+		},
+		text : "Enviar"
+	}).on("select", function() {
+		console.log("Enviar clicado");
+		var url = 'http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp?';//placa=bad888&eNumImage' + captcha.get("text");
+		fetch(url, {
+			method : 'post',
+			credentials: 'include',
+			body : JSON.stringify({
+				placa : 'bad888',
+				eNumImage : captcha.get("text")
+			})
+		}).then(function(response) {
+			console.log(response);
+		});
+	}).appendTo(page);
 	page.open();
 }
 
@@ -80,8 +127,8 @@ function loadItems() {
 }
 
 function onLoaded() {
-	placaTab = require('./placasTab')(placas, fns, 'placa').appendTo(tabs);
-	placaTab = require('./placasTab')(renavams, fns, 'renavam').appendTo(tabs);
+	require('./placasTab')(placas, fns, 'placa').appendTo(tabs);
+	require('./placasTab')(renavams, fns, 'renavam').appendTo(tabs);
 	page.apply(texts.tabris.main)
 }
 
