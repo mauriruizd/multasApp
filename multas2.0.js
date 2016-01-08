@@ -17,11 +17,13 @@ var page = tabris.create("Page", {
 });
 
 (function(){
-	AdMob.createBanner({
-		adId: "ca-app-pub-4262153315408338/5433110001",
-		position: AdMob.AD_POSITION.BOTTOM_CENTER,
-		autoShow: true
-	});
+	if(2===1){
+		AdMob.createBanner({
+			adId: "ca-app-pub-4262153315408338/5433110001",
+			position: AdMob.AD_POSITION.BOTTOM_CENTER,
+			autoShow: true
+		});
+	}
 })()
 
 var tabs = tabris.create("TabFolder", {
@@ -43,7 +45,7 @@ function createWebView(item, type) {
 	var page = tabris.create("Page", {
 		topLevel : false
 	});
-
+/*
 	var webView = tabris.create("WebView", {
 		layoutData : {
 			top : 0,
@@ -55,8 +57,8 @@ function createWebView(item, type) {
 	}).on("load", function() {
 		page.set("title", type.toUpperCase() + ' ' + item);
 	}).appendTo(page);
-
-/*	var txt = tabris.create("TextInput", {
+*/
+	var txt = tabris.create("TextInput", {
 		layoutData : {
 			top : 10,
 			left : 20,
@@ -70,13 +72,9 @@ function createWebView(item, type) {
 			top : "prev() 10",
 			left : 40,
 			right : 40
-		}
+		},
+		image : 'http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp'
 	}).appendTo(page);
-
-	fetch("http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp")
-	.then(function(r) {
-		console.log(r);
-	});
 
 	var captcha = tabris.create("TextInput", {
 		layoutData : {
@@ -96,18 +94,18 @@ function createWebView(item, type) {
 		text : "Enviar"
 	}).on("select", function() {
 		console.log("Enviar clicado");
-		var url = 'http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp?';//placa=bad888&eNumImage' + captcha.get("text");
-		fetch(url, {
-			method : 'post',
-			credentials: 'include',
-			body : JSON.stringify({
-				placa : 'bad888',
-				eNumImage : captcha.get("text")
-			})
-		}).then(function(response) {
-			console.log(response);
-		});
-	}).appendTo(page);*/
+		var url = 'http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp?placa=bad888&eNumImage=' + captcha.get("text");
+		var xhr = new tabris.XMLHttpRequest();
+		console.log(xhr);
+		xhr.withCredentials = true;
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === xhr.DONE) {
+				console.log(xhr.responseText);
+			}
+		}
+		xhr.open("POST", url);
+		xhr.send();
+	}).appendTo(page);
 	page.open();
 }
 
@@ -117,6 +115,19 @@ function genHtml(item, type) {
 		html += '<img src="http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp" style="width : 100%"><br>';
 		html += '<input type="text" name="eNumImage" autocomplete="off" placeholder="Captcha" style="width:100%; font-size: 2em; border: 0; border-bottom : solid 1px rgba(0,0,0,0.85)" autofocus="true"><br>';
 		html += '<button type="submit" id="submit" style="font-size:1.2em; border:0; width : 100%; background-color: #29323D; display : block; padding: 10px 0; color : #FFF;">' + getWebText('submitBtn') + '</button>';
+		html += '<script>';
+		html += 'console.log("Log desde WebView");';
+		html += 'function(send){';
+		html += 'var xhr = new tabris.XMLHttpRequest();';
+		html += 'xhr.onreadystatechange = function() {';
+		html += 'if (xhr.readyState === xhr.DONE) {';
+		html += 'console.log(xhr.responseText)';
+		html += '}';
+		html += '}';
+		html += 'xhr.open("POST", "http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp?placa=bad888&eNumImage=" + send);';
+		html += 'xhr.send();';
+		html += '}';
+		html += '</script>';
 	return html;
 }
 
