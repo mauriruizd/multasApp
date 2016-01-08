@@ -14,13 +14,15 @@ fns = {
 var page = tabris.create("Page", {
 	id : 'main',
 	topLevel : true
-}).on("appear", function(){
-	AdMob.createBanner({
-    adId: "ca-app-pub-4262153315408338/5433110001",
-    position: AdMob.AD_POSITION.TOP_CENTER,
-    autoShow: true
-  });
 });
+
+(function(){
+	AdMob.createBanner({
+		adId: "ca-app-pub-4262153315408338/5433110001",
+		position: AdMob.AD_POSITION.BOTTOM_CENTER,
+		autoShow: true
+	});
+})()
 
 var tabs = tabris.create("TabFolder", {
 	layoutData : {
