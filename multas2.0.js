@@ -14,6 +14,12 @@ fns = {
 var page = tabris.create("Page", {
 	id : 'main',
 	topLevel : true
+}).on("appear", function(){
+	AdMob.createBanner({
+    adId: "ca-app-pub-4262153315408338/5433110001",
+    position: AdMob.AD_POSITION.TOP_CENTER,
+    autoShow: true
+  });
 });
 
 var tabs = tabris.create("TabFolder", {
@@ -35,7 +41,7 @@ function createWebView(item, type) {
 	var page = tabris.create("Page", {
 		topLevel : false
 	});
-/*
+
 	var webView = tabris.create("WebView", {
 		layoutData : {
 			top : 0,
@@ -47,8 +53,8 @@ function createWebView(item, type) {
 	}).on("load", function() {
 		page.set("title", type.toUpperCase() + ' ' + item);
 	}).appendTo(page);
-*/
-	var txt = tabris.create("TextInput", {
+
+/*	var txt = tabris.create("TextInput", {
 		layoutData : {
 			top : 10,
 			left : 20,
@@ -99,7 +105,7 @@ function createWebView(item, type) {
 		}).then(function(response) {
 			console.log(response);
 		});
-	}).appendTo(page);
+	}).appendTo(page);*/
 	page.open();
 }
 

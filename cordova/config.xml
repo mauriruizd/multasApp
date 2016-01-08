@@ -7,4 +7,6 @@
   <author email="wigo@wigolabs.com" href="https://wigolabs.com">
    Wigo Creative
   </author>
+  <preference name="Theme" value="Theme.Material.Light" />
+  <plugin name="cordova-plugin-admobpro" />
 </widget>

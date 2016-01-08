@@ -3,7 +3,7 @@
   "description": "Verifica tus multas en Brasil",
   "main": "multas2.0.js",
   "dependencies": {
-    "tabris": "^1.1.0",
+    "tabris": "^1.5.0",
     "promise" : "^6.1.0",
     "whatwg-fetch": "^0.10.1"
   }
