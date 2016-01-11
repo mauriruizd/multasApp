@@ -5,8 +5,7 @@ var renavams = null;
 loadItems();
 var lang = tabris.device.get("language").replace(/-.*/, "");
 var texts = require("./texts/" + lang + ".json") || require("./texts/es.json");
-
-fns = {
+var fns = {
 	create : createWebView,
 	save : saveItem
 }
@@ -17,7 +16,7 @@ var page = tabris.create("Page", {
 });
 
 (function(){
-	if(2===1){
+	if(2===2){
 		AdMob.createBanner({
 			adId: "ca-app-pub-4262153315408338/5433110001",
 			position: AdMob.AD_POSITION.BOTTOM_CENTER,
@@ -45,15 +44,14 @@ function createWebView(item, type) {
 	var page = tabris.create("Page", {
 		topLevel : false
 	});
-/*
-	var webView = tabris.create("WebView", {
+
+	/*var webView = tabris.create("WebView", {
 		layoutData : {
 			top : 0,
 			left : 10,
-			bottom : 0,
 			right : 10
 		},
-		html : genHtml(item, type)
+		html : genImgHtml(item, type)
 	}).on("load", function() {
 		page.set("title", type.toUpperCase() + ' ' + item);
 	}).appendTo(page);
@@ -70,9 +68,10 @@ function createWebView(item, type) {
 	var img = tabris.create("ImageView", {
 		layoutData : {
 			top : "prev() 10",
-			left : 40,
-			right : 40
+			left : 10,
+			right : 10
 		},
+		scale : 2,
 		image : 'http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp'
 	}).appendTo(page);
 
@@ -93,20 +92,31 @@ function createWebView(item, type) {
 		},
 		text : "Enviar"
 	}).on("select", function() {
-		console.log("Enviar clicado");
+		/*console.log("Enviar clicado");
 		var url = 'http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp?placa=bad888&eNumImage=' + captcha.get("text");
 		var xhr = new tabris.XMLHttpRequest();
-		console.log(xhr);
 		xhr.withCredentials = true;
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === xhr.DONE) {
 				console.log(xhr.responseText);
 			}
 		}
-		xhr.open("POST", url);
-		xhr.send();
+		xhr.open("GET", url);
+		xhr.send();*/
+		fetch('http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp?placa=bad888&eNumImage=' + captcha.get("text"), {
+			credentials : "include",
+			method : "GET"
+		})
+		.then(function(res) {
+			console.log(res._bodyInit);
+		});
 	}).appendTo(page);
 	page.open();
+}
+
+function genImgHtml(){
+	html = '<img src="http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp" style="width : 100%"><br>';
+	return html;
 }
 
 function genHtml(item, type) {
