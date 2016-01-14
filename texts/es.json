@@ -36,11 +36,13 @@
 			},
 			"#renavamTab" : {
 				"title" : "Consulta por Renavam"
-			}
+			},
+			"#webView" : "Cargando"
 		}
 	},
 	"web" : {
 		"addLabel" : "Agregue chapas desde el menú lateral",
-		"submitBtn" : "Consultar"
+		"submitBtn" : "Consultar",
+		"captchaCar" : "Captcha Cargando"
 	}
 }

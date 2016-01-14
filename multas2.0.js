@@ -2,7 +2,6 @@ Promise = require('promise');
 require('whatwg-fetch');
 var placas = null;
 var renavams = null;
-loadItems();
 var lang = tabris.device.get("language").replace(/-.*/, "");
 var texts = require("./texts/" + lang + ".json") || require("./texts/es.json");
 var fns = {
@@ -36,108 +35,38 @@ var tabs = tabris.create("TabFolder", {
 }).appendTo(page);
 
 page.open();
-onLoaded();
+loadItems();
 
 function createWebView(item, type) {
 	// type === "placa" | "renavam"
 
 	var page = tabris.create("Page", {
-		topLevel : false
+		topLevel : false,
+		title : getTabrisText('#webView')
 	});
 
-	/*var webView = tabris.create("WebView", {
+	var webView = tabris.create("WebView", {
+		id : 'webView',
 		layoutData : {
 			top : 0,
 			left : 10,
 			right : 10
 		},
-		html : genImgHtml(item, type)
+		enabled : false,
+		html : genHtml(item, type)
 	}).on("load", function() {
 		page.set("title", type.toUpperCase() + ' ' + item);
 	}).appendTo(page);
-*/
-	var txt = tabris.create("TextInput", {
-		layoutData : {
-			top : 10,
-			left : 20,
-			right : 20
-		},
-		message : type
-	}).appendTo(page);
 
-	var img = tabris.create("ImageView", {
-		layoutData : {
-			top : "prev() 10",
-			left : 10,
-			right : 10
-		},
-		scale : 2,
-		image : 'http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp'
-	}).appendTo(page);
-
-	var captcha = tabris.create("TextInput", {
-		layoutData : {
-			top : "prev() 10",
-			left : 20,
-			right : 20
-		},
-		message : "Captcha"
-	}).appendTo(page);
-
-	var btn = tabris.create("Button", {
-		layoutData : {
-			top : "prev() 10",
-			left : 20,
-			right : 20
-		},
-		text : "Enviar"
-	}).on("select", function() {
-		/*console.log("Enviar clicado");
-		var url = 'http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp?placa=bad888&eNumImage=' + captcha.get("text");
-		var xhr = new tabris.XMLHttpRequest();
-		xhr.withCredentials = true;
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState === xhr.DONE) {
-				console.log(xhr.responseText);
-			}
-		}
-		xhr.open("GET", url);
-		xhr.send();*/
-		fetch('http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp?placa=bad888&eNumImage=' + captcha.get("text"), {
-			credentials : "include",
-			method : "GET"
-		})
-		.then(function(res) {
-			console.log(res._bodyInit);
-		});
-	}).appendTo(page);
 	page.open();
-}
-
-function genImgHtml(){
-	html = '<img src="http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp" style="width : 100%"><br>';
-	return html;
 }
 
 function genHtml(item, type) {
 	var html  = '<form action="http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp" method="post" id="form">';
 		html += '<input type="hidden" name="' + type + '" value="' + item + '"><br>';
-		html += '<img src="http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp" style="width : 100%"><br>';
+		html += '<img src="http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp" style="width : 100%" title="' + getWebText('captchaCar') + '" alt="' + getWebText('captchaCar') + '"><br>';
 		html += '<input type="text" name="eNumImage" autocomplete="off" placeholder="Captcha" style="width:100%; font-size: 2em; border: 0; border-bottom : solid 1px rgba(0,0,0,0.85)" autofocus="true"><br>';
 		html += '<button type="submit" id="submit" style="font-size:1.2em; border:0; width : 100%; background-color: #29323D; display : block; padding: 10px 0; color : #FFF;">' + getWebText('submitBtn') + '</button>';
-		html += '<script>';
-		html += 'console.log("Log desde WebView");';
-		html += 'function(send){';
-		html += 'var xhr = new tabris.XMLHttpRequest();';
-		html += 'xhr.onreadystatechange = function() {';
-		html += 'if (xhr.readyState === xhr.DONE) {';
-		html += 'console.log(xhr.responseText)';
-		html += '}';
-		html += '}';
-		html += 'xhr.open("POST", "http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp?placa=bad888&eNumImage=" + send);';
-		html += 'xhr.send();';
-		html += '}';
-		html += '</script>';
 	return html;
 }
 
@@ -153,6 +82,7 @@ function saveItem(type, items, item) {
 function loadItems() {
 	placas = localStorage.getItem("placas") === null ? [] : JSON.parse(localStorage.getItem("placas"));
 	renavams = localStorage.getItem("renavams") === null ? [] : JSON.parse(localStorage.getItem("renavams"));
+	onLoaded();
 }
 
 function onLoaded() {
@@ -163,4 +93,10 @@ function onLoaded() {
 
 function getWebText(selector) {
 	return (texts) !== null ? texts.web[selector] : '';
+}
+
+function getTabrisText(selector) {
+	console.log(selector);
+	console.log(texts.tabris.main[selector]);
+	return (texts) !== null ? texts.tabris.main[selector] : '';
 }
