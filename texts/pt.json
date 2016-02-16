@@ -5,39 +5,39 @@
 				"title" : "MultaPar"
 			},
 			"#refreshBtn" : {
-				"text" : "Recargar"
+				"text" : "Recarregar"
 			},
 			"#settingsPage" : {
-				"title" : "Registro de Placas"
+				"title" : "Registro de Matriculas"
 			},
 			"#inputplaca" : {
-				"message" : "Inserte su Placa"
+				"message" : "Insira sua Matricula"
 			},
 			"#addplaca" : {
-				"text" : "Agregar Placa"
+				"text" : "Adicionar Matricula"
 			},
 			"#inputrenavam" : {
-				"message" : "Inserte su Renavam"
+				"message" : "Insira seu Renavam"
 			},
 			"#addrenavam" : {
-				"text" : "Agregar Renavam"
+				"text" : "Adicionar Renavam"
 			},
 			".actionBtn" : {
 				"textColor" : "#FFF",
 				"background" : "#29323D"
 			},
 			"#placaTab" : {
-				"title" : "Consulta por Chapa"
+				"title" : "Consultar por Matricula"
 			},
 			"#renavamTab" : {
-				"title" : "Consulta por Renavam"
+				"title" : "Consultar por Renavam"
 			},
-			"#webView" : "Cargando"
+			"#webView" : "Carregando"
 		}
 	},
 	"web" : {
 		"submitBtn" : "Consultar",
-		"placa" : "PLACA",
+		"placa" : "MATRICULA",
 		"renavam" : "RENAVAM"
 	}
 }

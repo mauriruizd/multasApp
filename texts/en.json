@@ -5,39 +5,39 @@
 				"title" : "MultaPar"
 			},
 			"#refreshBtn" : {
-				"text" : "Recargar"
+				"text" : "Reload"
 			},
 			"#settingsPage" : {
-				"title" : "Registro de Placas"
+				"title" : "Car Plate Registration"
 			},
 			"#inputplaca" : {
-				"message" : "Inserte su Placa"
+				"message" : "Insert your Car Plate"
 			},
 			"#addplaca" : {
-				"text" : "Agregar Placa"
+				"text" : "Add Car Plate"
 			},
 			"#inputrenavam" : {
-				"message" : "Inserte su Renavam"
+				"message" : "Insert your Renavam"
 			},
 			"#addrenavam" : {
-				"text" : "Agregar Renavam"
+				"text" : "Add Renavam"
 			},
 			".actionBtn" : {
 				"textColor" : "#FFF",
 				"background" : "#29323D"
 			},
 			"#placaTab" : {
-				"title" : "Consulta por Chapa"
+				"title" : "Search by Car Plate"
 			},
 			"#renavamTab" : {
-				"title" : "Consulta por Renavam"
+				"title" : "Searh by Renavam"
 			},
-			"#webView" : "Cargando"
+			"#webView" : "Loading"
 		}
 	},
 	"web" : {
-		"submitBtn" : "Consultar",
-		"placa" : "PLACA",
+		"submitBtn" : "Search",
+		"placa" : "CAR PLATE",
 		"renavam" : "RENAVAM"
 	}
 }

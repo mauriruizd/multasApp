@@ -1,11 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.wigocreative.multas.app" version="1.1.1">
-  <name>MultasApp</name>
+  <name>MultaPar</name>
   <description>
-   Verifica tus multas en Brasil
+   Verifica tus multas en el estado de Paraná, Brasil.
   </description>
   <author email="wigo@wigolabs.com" href="https://wigolabs.com">
    Wigo Creative
   </author>ight" />
   <plugin name="cordova-plugin-admobpro" />
+  <platform name="android">
+		<icon src="res/icons/android/mdpi.png" density="mdpi" />
+		<icon src="res/icons/android/hdpi.png" density="hdpi" />
+		<icon src="res/icons/android/xhdpi.png" density="xhdpi" />
+		<icon src="res/icons/android/xxhdpi.png" density="xxhdpi" />
+		<icon src="res/icons/android/xxxhdpi.png" density="xxxhdpi" />
+	</platform>
 </widget>

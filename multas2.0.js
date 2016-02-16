@@ -59,22 +59,13 @@ function createWebView(item, type) {
 			right : 10
 		},
 		enabled : false,
-		url : "./iframe.html?" + type + "=" + item
+		url : "./iframe.html?" + type + "=" + item + "&submit=" + texts.web.submitBtn
 		//html : genHtml(item, type)
 	}).on("load", function() {
-		page.set("title", type.toUpperCase() + ' ' + item);
+		page.set("title", getWebText(type) + ' ' + item);
 	}).appendTo(page);
 
 	page.open();
-}
-
-function genHtml(item, type) {
-	var html  = '<form action="http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp" method="post" id="form">';
-		html += '<input type="hidden" name="' + type + '" value="' + item + '"><br>';
-		html += '<img src="http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp" style="width : 100%" title="' + getWebText('captchaCar') + '" alt="' + getWebText('captchaCar') + '"><br>';
-		html += '<input type="text" name="eNumImage" autocomplete="off" placeholder="Captcha" style="width:100%; font-size: 2em; border: 0; border-bottom : solid 1px rgba(0,0,0,0.85)" autofocus="true"><br>';
-		html += '<button type="submit" id="submit" style="font-size:1.2em; border:0; width : 100%; background-color: #29323D; display : block; padding: 10px 0; color : #FFF;">' + getWebText('submitBtn') + '</button>';
-	return html;
 }
 
 function saveItem(type, items, item) {
