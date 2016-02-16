@@ -1,9 +1,15 @@
 Promise = require('promise');
 require('whatwg-fetch');
-var placas = null;
-var renavams = null;
-var lang = tabris.device.get("language").replace(/-.*/, "");
-var texts = require("./texts/" + lang + ".json") || require("./texts/es.json");
+var placas = [];
+var renavams = [];
+var texts = (function(){
+	var lang = tabris.device.get("language").replace(/-.*/, "");
+	try {
+		return require("./texts/" + lang + ".json");
+	} catch(e) {
+		return require("./texts/en.json");
+	}
+}());
 var fns = {
 	create : createWebView,
 	save : saveItem
@@ -15,7 +21,7 @@ var page = tabris.create("Page", {
 });
 
 (function(){
-	if(2===2){
+	if(2===1){
 		AdMob.createBanner({
 			adId: "ca-app-pub-4262153315408338/5433110001",
 			position: AdMob.AD_POSITION.BOTTOM_CENTER,
@@ -53,7 +59,8 @@ function createWebView(item, type) {
 			right : 10
 		},
 		enabled : false,
-		html : genHtml(item, type)
+		url : "./iframe.html?" + type + "=" + item
+		//html : genHtml(item, type)
 	}).on("load", function() {
 		page.set("title", type.toUpperCase() + ' ' + item);
 	}).appendTo(page);
@@ -80,9 +87,20 @@ function saveItem(type, items, item) {
 }
 
 function loadItems() {
-	placas = localStorage.getItem("placas") === null ? [] : JSON.parse(localStorage.getItem("placas"));
-	renavams = localStorage.getItem("renavams") === null ? [] : JSON.parse(localStorage.getItem("renavams"));
+	placas = getFromStorage("placas");
+	renavams = getFromStorage("renavams");
 	onLoaded();
+}
+
+function getFromStorage(index) {
+	return (function(){
+		var getted = localStorage.getItem(index);
+		if (getted == null) {
+			return [];
+		} else {
+			return JSON.parse(getted);
+		}
+	}());
 }
 
 function onLoaded() {
@@ -96,7 +114,5 @@ function getWebText(selector) {
 }
 
 function getTabrisText(selector) {
-	console.log(selector);
-	console.log(texts.tabris.main[selector]);
 	return (texts) !== null ? texts.tabris.main[selector] : '';
 }
