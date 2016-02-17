@@ -1,5 +1,6 @@
 Promise = require('promise');
 require('whatwg-fetch');
+tabris.ui.set("toolbarVisible", false);
 var placas = [];
 var renavams = [];
 var texts = (function(){
@@ -15,13 +16,41 @@ var fns = {
 	save : saveItem
 }
 
+var introPage = tabris.create("Page", {
+	topLevel : true,
+	background : "#3E6898"
+}).open();
+
+var introImage = tabris.create("ImageView", {
+	layoutData : {
+		top : 0,
+		left : 0,
+		right : 0,
+		bottom : 0
+	},
+	opacity : 0,
+	scaleMode : "fit",
+	image : {
+		src : "./img/multapar.png"
+	}
+}).appendTo(introPage);
+
+introImage.animate({ opacity : 1 }, { duration : 1500 });
+setTimeout(function(){
+	introImage.animate({ opacity : 0 }, { duration : 500, delay : 1500 });
+	setTimeout(function() {
+		tabris.ui.set("toolbarVisible", true);
+		page.open();
+	}, 2000);
+}, 3000);
+
 var page = tabris.create("Page", {
 	id : 'main',
 	topLevel : true
 });
 
 (function(){
-	if(2===1){
+	if(2===2){
 		AdMob.createBanner({
 			adId: "ca-app-pub-4262153315408338/5433110001",
 			position: AdMob.AD_POSITION.BOTTOM_CENTER,
@@ -40,7 +69,6 @@ var tabs = tabris.create("TabFolder", {
 	paging : true
 }).appendTo(page);
 
-page.open();
 loadItems();
 
 function createWebView(item, type) {
