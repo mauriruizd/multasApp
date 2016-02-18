@@ -50,7 +50,7 @@ var page = tabris.create("Page", {
 });
 
 (function(){
-	if(2===2){
+	if(2===1){
 		AdMob.createBanner({
 			adId: "ca-app-pub-8937553752827350/3346296426",
 			position: AdMob.AD_POSITION.BOTTOM_CENTER,
