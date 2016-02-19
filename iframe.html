@@ -54,8 +54,8 @@
 		var query = location.href.substr(location.href.indexOf("?") + 1);
 		query.split("&").forEach(function(part) {
 			var parts = part.split("=");
-			document.getElementById(parts[0]).value = parts[1];
-			document.getElementById(parts[0]).innerHTML = parts[1];
+			document.getElementById(parts[0]).value = parts[1].replace(/-/g, ' ');
+			document.getElementById(parts[0]).innerHTML = parts[1].replace(/-/g, ' ');
 		});
 		document.getElementById("recaptcha").addEventListener("click", function() {
 			console.log("Recaptcha clickado");
@@ -67,13 +67,12 @@
 			var renavam = document.getElementById("renavam").value;
 			var eNumImage = document.getElementById("eNumImage").value;
 			iframe.src = "http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp?placa=" + placa + "&renavam=" + renavam + "&eNumImage=" + eNumImage;
-			iframe.onload = function() {
-				console.log("iframe loaded");
+			/*iframe.onload = function() {
 				diffOffset(-300);
 				setTimeout(function() {
 					diffOffset(0);
 				}, 2000);
-			}
+			}*/
 			document.getElementById("form").style.display = "none";
 			document.getElementById("parent-div").style.display = "block";
 		});
