@@ -2,7 +2,7 @@
 	"tabris" : {
 		"main" : {
 			"#main" : {
-				"title" : "MultaPar"
+				"title" : "Consulta de Multas Roadstar"
 			},
 			"#refreshBtn" : {
 				"text" : "Recargar"
@@ -27,7 +27,7 @@
 				"background" : "#29323D"
 			},
 			"#placaTab" : {
-				"title" : "Consulta por Chapa"
+				"title" : "Consulta por Placa"
 			},
 			"#renavamTab" : {
 				"title" : "Consulta por Renavam"
@@ -38,6 +38,7 @@
 	"web" : {
 		"submitBtn" : "Consultar",
 		"placa" : "PLACA",
-		"renavam" : "RENAVAM"
+		"renavam" : "RENAVAM",
+		"recaptcha" : "Recargar Captcha"
 	}
 }

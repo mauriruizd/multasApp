@@ -2,7 +2,7 @@
 	"tabris" : {
 		"main" : {
 			"#main" : {
-				"title" : "MultaPar"
+				"title" : "Consulta de Multas da Roadstar"
 			},
 			"#refreshBtn" : {
 				"text" : "Recarregar"
@@ -38,6 +38,7 @@
 	"web" : {
 		"submitBtn" : "Consultar",
 		"placa" : "MATRICULA",
-		"renavam" : "RENAVAM"
+		"renavam" : "RENAVAM",
+		"recaptcha" : "Recarregar Captcha"
 	}
 }

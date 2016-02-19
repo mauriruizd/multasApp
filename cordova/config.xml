@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.wigocreative.multas.app" version="1.2.2">
-  <name>MultaPar</name>
+<widget id="com.wigocreative.multas.app" version="1.2.3">
+  <name>Consulta de Multas Roadstar</name>
   <description>
    Verifica tus multas en el estado de Paraná, Brasil.
   </description>
   <author email="wigo@wigolabs.com" href="https://wigolabs.com">
    Wigo Creative
-  </author>ight" />
+  </author>
   <plugin name="cordova-plugin-admobpro" />
   <platform name="android">
 		<icon src="res/icons/android/mdpi.png" density="mdpi" />

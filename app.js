@@ -16,8 +16,7 @@ var fns = {
 
 var page = tabris.create("Page", {
 	id : 'main',
-	topLevel : true,
-	background : "#3E6898"
+	topLevel : true
 });
 
 var introImage = tabris.create("ImageView", {
@@ -30,7 +29,7 @@ var introImage = tabris.create("ImageView", {
 	opacity : 0,
 	scaleMode : "fit",
 	image : {
-		src : "./img/multapar.png"
+		src : "./img/roadstar.png"
 	}
 }).appendTo(page);
 
@@ -42,14 +41,13 @@ setTimeout(function(){
 	setTimeout(function() {
 		tabris.ui.set("toolbarVisible", true);
 		introImage.dispose();
-		page.set({background : "#FFF"});
 		tabs.appendTo(page).animate({ opacity : 1 }, { duration : 500 });
 		loadItems();
 	}, 2000);
 }, 3000);
 
 (function(){
-	if(2===2){
+	if(2===1){
 		AdMob.createBanner({
 			adId: "ca-app-pub-8937553752827350/3346296426",
 			position: AdMob.AD_POSITION.BOTTOM_CENTER,
@@ -85,7 +83,7 @@ function createWebView(item, type) {
 			right : 10
 		},
 		enabled : false,
-		url : "./iframe.html?" + type + "=" + item + "&submit=" + texts.web.submitBtn
+		url : "./iframe.html?" + type + "=" + item + "&submit=" + texts.web.submitBtn + "&recaptcha=" + texts.web.recaptcha
 		//html : genHtml(item, type)
 	}).on("load", function() {
 		page.set("title", getWebText(type) + ' ' + item);

@@ -14,10 +14,11 @@
 		}
 		#iframe {
 			position: absolute;
-			top : -200px;
+			top : -190px;
 			left : -195px;
 			width: 779px;
 			height: 1000px;
+			transition: all 0.5s ease;
 		}
 		#form {
 			width: 100%;
@@ -32,16 +33,33 @@
 	<form action="http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp" method="post" id="form" onsubmit="return false;">
 		<input type="hidden" name="placa" id="placa"><br>
 		<input type="hidden" name="renavam" id="renavam"><br>
-		<img src="http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp" style="width : 100%" ><br>
+		<img id="captcha" src="http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp" style="width : 100%" ><br>
 		<input type="text" name="eNumImage" id="eNumImage" autocomplete="off" placeholder="Captcha" style="width:100%; font-size: 2em; border: 0; border-bottom : solid 1px rgba(0,0,0,0.85)" autofocus="true"><br>
+		<button type="button" id="recaptcha" style="font-size:1.2em; border:1; width : 100%; background-color: #F6F6F6; display : block; padding: 10px 0; color : #AAA;">Recarregar Captcha</button>
 		<button type="button" id="submit" style="font-size:1.2em; border:0; width : 100%; background-color: #29323D; display : block; padding: 10px 0; color : #FFF;">Enviar</button>
 	</form>
 	<script>
+		function diffOffset(x) {
+			var iframe = document.getElementById("iframe");
+			var def = getDefaultCSS();
+			iframe.style.left = ( def.left + x ) + "px";
+			iframe.style.width = ( def.width - x ) + "px";
+		}
+		function getDefaultCSS(){
+			return {
+				left : -195,
+				width : 779
+			}
+		}
 		var query = location.href.substr(location.href.indexOf("?") + 1);
 		query.split("&").forEach(function(part) {
 			var parts = part.split("=");
 			document.getElementById(parts[0]).value = parts[1];
 			document.getElementById(parts[0]).innerHTML = parts[1];
+		});
+		document.getElementById("recaptcha").addEventListener("click", function() {
+			console.log("Recaptcha clickado");
+			document.getElementById("captcha").src = "http://celepar7.pr.gov.br/mtm/Scripts/viewImageMagicMTM.asp?date=" + Date.now();
 		});
 		document.getElementById("submit").addEventListener("click", function() {
 			var iframe = document.getElementById("iframe");
@@ -49,6 +67,13 @@
 			var renavam = document.getElementById("renavam").value;
 			var eNumImage = document.getElementById("eNumImage").value;
 			iframe.src = "http://celepar7.pr.gov.br/mtm/servicos/deb_veiculo.asp?placa=" + placa + "&renavam=" + renavam + "&eNumImage=" + eNumImage;
+			iframe.onload = function() {
+				console.log("iframe loaded");
+				diffOffset(-300);
+				setTimeout(function() {
+					diffOffset(0);
+				}, 2000);
+			}
 			document.getElementById("form").style.display = "none";
 			document.getElementById("parent-div").style.display = "block";
 		});

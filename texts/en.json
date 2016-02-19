@@ -2,7 +2,7 @@
 	"tabris" : {
 		"main" : {
 			"#main" : {
-				"title" : "MultaPar"
+				"title" : "Roadstar's Traffic Ticket Consultation"
 			},
 			"#refreshBtn" : {
 				"text" : "Reload"
@@ -38,6 +38,7 @@
 	"web" : {
 		"submitBtn" : "Search",
 		"placa" : "CAR PLATE",
-		"renavam" : "RENAVAM"
+		"renavam" : "RENAVAM",
+		"recaptcha" : "Reload Captcha"
 	}
 }
