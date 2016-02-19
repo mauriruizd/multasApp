@@ -16,10 +16,11 @@ var fns = {
 	save : saveItem
 }
 
-var introPage = tabris.create("Page", {
+var page = tabris.create("Page", {
+	id : 'main',
 	topLevel : true,
 	background : "#3E6898"
-}).open();
+});
 
 var introImage = tabris.create("ImageView", {
 	layoutData : {
@@ -33,24 +34,24 @@ var introImage = tabris.create("ImageView", {
 	image : {
 		src : "./img/multapar.png"
 	}
-}).appendTo(introPage);
+}).appendTo(page);
+
+page.open();
 
 introImage.animate({ opacity : 1 }, { duration : 1500 });
 setTimeout(function(){
 	introImage.animate({ opacity : 0 }, { duration : 500, delay : 1500 });
 	setTimeout(function() {
 		tabris.ui.set("toolbarVisible", true);
-		page.open();
+		introImage.dispose();
+		page.set({background : "#FFF"});
+		tabs.appendTo(page).animate({ opacity : 1 }, { duration : 500 });
+		loadItems();
 	}, 2000);
 }, 3000);
 
-var page = tabris.create("Page", {
-	id : 'main',
-	topLevel : true
-});
-
 (function(){
-	if(2===2){
+	if(2===1){
 		AdMob.createBanner({
 			adId: "ca-app-pub-8937553752827350/3346296426",
 			position: AdMob.AD_POSITION.BOTTOM_CENTER,
@@ -66,10 +67,9 @@ var tabs = tabris.create("TabFolder", {
 		bottom : 0,
 		right : 0
 	},
-	paging : true
-}).appendTo(page);
-
-loadItems();
+	paging : true,
+	opacity : 0
+});
 
 function createWebView(item, type) {
 	// type === "placa" | "renavam"
