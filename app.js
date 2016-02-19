@@ -1,5 +1,3 @@
-Promise = require('promise');
-require('whatwg-fetch');
 tabris.ui.set("toolbarVisible", false);
 var placas = [];
 var renavams = [];
@@ -58,7 +56,7 @@ setTimeout(function(){
 			autoShow: true
 		});
 	}
-})()
+})();
 
 var tabs = tabris.create("TabFolder", {
 	layoutData : {
@@ -123,8 +121,8 @@ function getFromStorage(index) {
 }
 
 function onLoaded() {
-	require('./placasTab')(placas, fns, 'placa').appendTo(tabs);
-	require('./placasTab')(renavams, fns, 'renavam').appendTo(tabs);
+	require('./placasTab.js')(placas, fns, 'placa').appendTo(tabs);
+	require('./placasTab.js')(renavams, fns, 'renavam').appendTo(tabs);
 	page.apply(texts.tabris.main)
 }
 
