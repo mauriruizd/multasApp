@@ -51,7 +51,7 @@ setTimeout(function(){
 }, 3000);
 
 (function(){
-	if(2===1){
+	if(2===2){
 		AdMob.createBanner({
 			adId: "ca-app-pub-8937553752827350/3346296426",
 			position: AdMob.AD_POSITION.BOTTOM_CENTER,
